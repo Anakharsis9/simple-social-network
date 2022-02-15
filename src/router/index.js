@@ -28,6 +28,7 @@ const routes = [
     component: () => import("../views/UserProfile.vue"),
     children: [
       { path: "", component: () => import("../components/UserInfo.vue") },
+      { path: "userEdit", component: () => import("../components/UserEdit.vue") },
     ],
   },
 ];

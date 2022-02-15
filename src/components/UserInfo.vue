@@ -5,7 +5,7 @@
         <i class="fas fa-user"></i>
       </div>
       <div class="buttons">
-        <button class="btn btn_main">Edit</button>
+        <button @click="editUser" class="btn btn_main">Edit</button>
         <button class="btn">Sign Out</button>
       </div>
     </div>
@@ -37,6 +37,11 @@ export default {
   name: "UserInfo",
   props: { user: Object, users: Array },
   components: { Comment },
+  methods: {
+    editUser() {
+      this.$router.push(`/${this.user.userId}/userEdit`);
+    },
+  },
 };
 </script>
 
@@ -89,14 +94,13 @@ h1 {
 
 .comments_wrapper {
   margin-top: 20px;
-  
 }
 .comments {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-.comment{
+.comment {
   margin-top: 10px;
 }
 </style>
