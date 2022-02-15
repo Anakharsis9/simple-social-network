@@ -1,13 +1,11 @@
 <template>
-  <div>{{this.$router.params}}</div>
+  <div></div>
 </template>
 
 <script>
 export default {
-
-}
+  name: "SignIn",
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
