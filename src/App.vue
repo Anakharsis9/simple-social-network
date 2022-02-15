@@ -4,7 +4,11 @@
       <router-link to="/">My profile</router-link> |
       <router-link to="/signUp">Sign Up</router-link>
     </div> -->
-    <router-view />
+    <router-view
+      :users="users"
+      :currentUser="getCurrentUser()"
+      @addNewUser="addNewUserHandler"
+    />
   </div>
 </template>
 
@@ -18,16 +22,40 @@ export default {
         fullName: "Dayana Ismailova",
         username: "anakharsis9",
         password: "1234",
-        comments: {
-          commentId: "commentId_12335",
-          author: "userId_123452",
-          text: "Some text",
-          date: "17/02/22 at 13:25",
-        },
+        comments: [
+          {
+            commentId: "commentId_12335",
+            author: "userId_123452",
+            text: "You gay? Laboriosam, hic deleniti similique adipisci provident unde nihil explicabo sunt ad incidunt quae, inventore recusandae quod delectus eligendi nulla ut! Fuga, quibusdam?",
+            date: "17/02/22 at 13:25",
+          },
+          {
+            commentId: "commentId_12335",
+            author: "userId_123452",
+            text: "You gay? Laboriosam, hic deleniti similique adipisci ?",
+            date: "13/02/22 at 13:25",
+          },
+        ],
+      },
+      {
+        userId: "userId_123452",
+        fullName: "Ansar Ryspekov",
+        username: "raydarar",
+        password: "1234",
+        comments: [],
       },
     ],
   }),
   created() {},
+  methods: {
+    addNewUserHandler(newUser) {
+      this.users.push(newUser);
+    },
+    getCurrentUser() {
+      const userId = localStorage.getItem("token");
+      return this.users.find((user) => user.userId === userId);
+    },
+  },
 };
 </script>
 
@@ -43,6 +71,7 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 #nav {
