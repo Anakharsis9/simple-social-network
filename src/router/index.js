@@ -24,12 +24,24 @@ const routes = [
   },
   {
     path: "/:id",
-    name: "UserProfile",
     component: () => import("../views/UserProfile.vue"),
     children: [
-      { path: "", component: () => import("../components/UserInfo.vue") },
-      { path: "userEdit", component: () => import("../components/UserEdit.vue") },
+      {
+        path: "/",
+        name: "UserProfileInfo",
+        component: () => import("../components/UserInfo.vue"),
+      },
+      {
+        path: "userEdit",
+        name: "UserProfileEdit",
+        component: () => import("../components/UserEdit.vue"),
+      },
     ],
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    redirect: { name: "SignIn" },
   },
 ];
 
@@ -51,7 +63,7 @@ router.beforeEach((to, from, next) => {
 
   if (token && isPublic) {
     return next({
-      name: "UserProfile",
+      name: "UserProfileInfo",
       params: {
         id: token,
       },

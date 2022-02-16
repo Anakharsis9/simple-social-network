@@ -6,7 +6,7 @@
       </div>
       <div class="buttons">
         <button @click="editUser" class="btn btn_main">Edit</button>
-        <button class="btn">Sign Out</button>
+        <button @click="signOut" class="btn">Sign Out</button>
       </div>
     </div>
     <div class="container">
@@ -41,13 +41,19 @@ export default {
     editUser() {
       this.$router.push(`/${this.user.userId}/userEdit`);
     },
+
+    signOut() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
+    },
   },
 };
 </script>
 
 <style scoped>
 .userInfo_wrapper {
-  background-color: rgb(230, 236, 238);
+  /* background-color: rgb(230, 236, 238); */
+  background-color: #42b983;
   width: 100%;
   display: grid;
   grid-template-columns: 20% 80%;

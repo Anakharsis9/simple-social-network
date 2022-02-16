@@ -51,7 +51,7 @@ export default {
       const { userId } = this.checkUser(this.userToken);
 
       localStorage.setItem("token", userId);
-      this.$router.push({ name: "UserProfile", params: { id: userId } });
+      this.$router.push({ name: "UserProfileInfo", params: { id: userId } });
     },
     checkUser(userToken) {
       return this.users.find(

@@ -37,7 +37,6 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
   padding: 20px;
   border-radius: 5px;
   background-color: white;
@@ -52,7 +51,7 @@ export default {
   font-size: 0.9rem;
   color: rgb(129, 129, 129);
 }
-.text{
+.text {
   text-align: start;
 }
 </style>
