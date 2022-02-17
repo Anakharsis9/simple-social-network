@@ -23,6 +23,11 @@ const routes = [
     },
   },
   {
+    path: "/friend/:userId",
+    name: "FriendPage",
+    component: () => import("../views/FriendProfile.vue"),
+  },
+  {
     path: "/:id",
     component: () => import("../views/UserProfile.vue"),
     children: [
@@ -37,10 +42,6 @@ const routes = [
         component: () => import("../components/UserEdit.vue"),
       },
     ],
-  },
-  {
-    path: "/friend/:userId",
-    component: () => import("../views/FriendProfile.vue"),
   },
   {
     path: "*",

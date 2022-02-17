@@ -10,9 +10,9 @@
       </div>
       <ul class="list">
         <li
-          @click="$router.push({ path: `/friend/${user.userId}` })"
-          v-for="user in allUsers"
+          v-for="user in allUsersFiltered"
           :key="user.userId"
+          @click="routeToFriend(user.userId)"
           class="list_item"
         >
           {{ user.fullName }}
@@ -29,13 +29,13 @@ export default {
     currentUser: Object,
     users: Array,
   },
-  components: {},
   data: () => ({
     searchUser: "",
   }),
   computed: {
-    allUsers() {
-      let searchUserText = this.searchUser.toLowerCase();
+    allUsersFiltered() {
+      const searchUserText = this.searchUser.toLowerCase();
+
       return this.users.filter(
         (user) =>
           user.userId !== this.currentUser.userId &&
@@ -43,7 +43,11 @@ export default {
       );
     },
   },
-  methods: {},
+  methods: {
+    routeToFriend(id) {
+      this.$router.push({ name: "FriendPage", params: { userId: id } });
+    },
+  },
 };
 </script>
 

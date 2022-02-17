@@ -1,9 +1,9 @@
 <template>
   <div class="inp_wrapper">
     <input
-      v-bind:value="value"
-      v-on:input="$emit('input', $event.target.value)"
+      :value="value"
       :type="show ? 'text' : type"
+      @input="$emit('input', $event.target.value)"
       placeholder=" "
     />
     <label>{{ labelText }}</label>

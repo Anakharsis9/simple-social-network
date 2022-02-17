@@ -1,6 +1,6 @@
 <template>
   <div class="signUp_wrapper">
-    <div class="form_wrapper">
+    <form @submit.prevent="createUser" class="form_wrapper">
       <h1>Sign Up</h1>
       <MyInput v-model="user.fullName" labelText="Full Name*" class="myInput" />
       <MyInput v-model="user.username" labelText="Username*" class="myInput" />
@@ -11,13 +11,13 @@
         class="myInput"
       />
 
-      <button @click="createUser" class="btn btn_main">Create account</button>
+      <button type="submit" class="btn btn_main">Create account</button>
 
       <span class="text">
         Already have an account?
         <router-link to="/signIn">Sign In</router-link>
       </span>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -43,9 +43,9 @@ export default {
     createUser() {
       if (!(this.user.fullName && this.user.username && this.user.password))
         return alert("Something was left unfilled");
-      else if (this.user.password.length < 8)
+      if (this.user.password.length < 8)
         return alert("Password length must be min 8 characters");
-      else if (this.checkUsername(this.user.username))
+      if (this.checkUsername(this.user.username))
         return alert("Please, select another username");
 
       const newUser = {
@@ -58,7 +58,7 @@ export default {
       this.$router.push("/signIn");
     },
     checkUsername(username) {
-      return this.users.find((user) => user.username === username);
+      return this.users.some((user) => user.username === username);
     },
   },
 };

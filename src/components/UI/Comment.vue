@@ -1,7 +1,7 @@
 <template>
   <div class="comment_wrapper">
     <div class="meta_info">
-      <h4>{{ findAuthor }}</h4>
+      <h4>{{ authorFullname }}</h4>
       <span class="date">{{ comment.date }}</span>
     </div>
 
@@ -21,14 +21,13 @@ export default {
     users: Array,
   },
   computed: {
-    findAuthor() {
+    authorFullname() {
       const { fullName } = this.users.find(
         (user) => user.userId === this.comment.author
       );
       return fullName;
     },
   },
-  methods: {},
 };
 </script>
 

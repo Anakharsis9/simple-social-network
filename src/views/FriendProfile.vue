@@ -73,12 +73,19 @@ export default {
   methods: {
     addComment() {
       const date = new Date();
-      const dateText = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} at ${date.getHours()}:${date.getMinutes()}`;
-      this.pageOwner.comments.push({
-        commentId: uuidv4(),
-        author: this.currentUser.userId,
-        text: this.commentText,
-        date: dateText,
+      const dateText = `${date.toLocaleDateString()} at ${date.toLocaleTimeString(
+        undefined,
+        { hour: "numeric", minute: "numeric" }
+      )}`;
+
+      this.$emit("addNewComment", {
+        userId: this.pageOwner.userId,
+        comment: {
+          commentId: uuidv4(),
+          author: this.currentUser.userId,
+          text: this.commentText,
+          date: dateText,
+        },
       });
 
       this.commentText = "";

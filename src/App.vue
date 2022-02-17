@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">My profile</router-link> |
-      <router-link to="/signUp">Sign Up</router-link>
-    </div> -->
     <router-view
       :users="users"
-      :currentUser="getCurrentUser()"
-      @addNewUser="addNewUserHandler"
+      :currentUser="currentUser()"
+      @addNewUser="addNewUser"
+      @addNewComment="addNewComment"
+      class="component"
     />
   </div>
 </template>
@@ -60,15 +58,26 @@ export default {
       },
     ],
   }),
-  created() {},
   methods: {
-    addNewUserHandler(newUser) {
-      this.users.push(newUser);
-    },
-    getCurrentUser() {
+    currentUser() {
       const userId = localStorage.getItem("token");
       return this.users.find((user) => user.userId === userId);
     },
+    addNewUser(newUser) {
+      this.users.push(newUser);
+    },
+    addNewComment({ userId, comment }) {
+      const user = this.users.find((user) => user.userId === userId);
+      if (!user) return;
+
+      user.comments.push(comment);
+    },
+  },
+  created() {
+    if (!this.currentUser()) {
+      localStorage.removeItem("token");
+      this.$router.push({ name: "SignIn" });
+    }
   },
 };
 </script>
@@ -80,7 +89,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  width: 100vw;
+  height: 100vh;
 }
+
+.component {
+  height: 100%;
+}
+
 * {
   padding: 0;
   margin: 0;

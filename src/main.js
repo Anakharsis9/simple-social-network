@@ -9,5 +9,3 @@ const app = new Vue({
   render: (h) => h(App),
 });
 app.$mount("#app");
-
-if (process.env.NODE_ENV !== "production") window.app = app;

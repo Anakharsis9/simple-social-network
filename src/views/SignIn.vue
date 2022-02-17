@@ -2,13 +2,9 @@
   <div class="signIn_wrapper">
     <div class="form_wrapper">
       <h1>Sign In</h1>
+      <MyInput v-model="username" labelText="Username" class="myInput" />
       <MyInput
-        v-model="userToken.username"
-        labelText="Username"
-        class="myInput"
-      />
-      <MyInput
-        v-model="userToken.password"
+        v-model="password"
         type="password"
         labelText="Password"
         class="myInput"
@@ -35,29 +31,29 @@ export default {
     MyInput,
   },
   data: () => ({
-    userToken: {
-      username: "",
-      password: "",
-    },
+    username: "",
+    password: "",
   }),
   methods: {
     login() {
-      if (!(this.userToken.username && this.userToken.password))
+      if (!(this.username && this.password))
         return alert("Fill in the empty fields");
-      else if (!this.checkUser(this.userToken))
+
+      const user = this.findUser(this.username, this.password);
+      if (!user)
         return alert(
           "One of the fields is entered incorrectly or there is no such user"
         );
-      const { userId } = this.checkUser(this.userToken);
 
-      localStorage.setItem("token", userId);
-      this.$router.push({ name: "UserProfileInfo", params: { id: userId } });
+      localStorage.setItem("token", user.userId);
+      this.$router.push({
+        name: "UserProfileInfo",
+        params: { id: user.userId },
+      });
     },
-    checkUser(userToken) {
+    findUser(username, password) {
       return this.users.find(
-        (user) =>
-          user.username === userToken.username &&
-          user.password === userToken.password
+        (user) => user.username === username && user.password === password
       );
     },
   },
@@ -66,8 +62,6 @@ export default {
 
 <style scoped>
 .signIn_wrapper {
-  width: 100vw;
-  height: 100vh;
   background-color: #42b983;
   display: flex;
   justify-content: center;
