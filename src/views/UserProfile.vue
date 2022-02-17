@@ -1,6 +1,6 @@
 <template>
   <div class="userProfile_wrapper">
-    <AllUsers />
+    <AllUsers :currentUser="currentUser" :users="users"/>
     <router-view :user="currentUser" :users="users" />
   </div>
 </template>

@@ -39,6 +39,10 @@ const routes = [
     ],
   },
   {
+    path: "/friend/:userId",
+    component: () => import("../views/FriendProfile.vue"),
+  },
+  {
     path: "*",
     name: "NotFound",
     redirect: { name: "SignIn" },

@@ -30,7 +30,7 @@ export default {
             date: "17/02/22 at 13:25",
           },
           {
-            commentId: "commentId_12335",
+            commentId: "commentId_123356",
             author: "userId_123452",
             text: "You gay? Laboriosam, hic deleniti similique adipisci ?",
             date: "13/02/22 at 13:25",
@@ -43,6 +43,20 @@ export default {
         username: "raydarar",
         password: "1234",
         comments: [],
+      },
+      {
+        userId: "userId_1234525",
+        fullName: "Nikita Golovenko",
+        username: "nikitka",
+        password: "1234",
+        comments: [
+          {
+            commentId: "commentId_1233536",
+            author: "userId_12345",
+            text: "You gay? Laboriosam, hic deleniti similique adipisci ?",
+            date: "13/02/22 at 13:25",
+          },
+        ],
       },
     ],
   }),
@@ -71,7 +85,6 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  
 }
 
 #nav {
