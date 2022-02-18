@@ -36,26 +36,37 @@ export default {
     newUsername: "",
     newPassword: "",
   }),
+  created() {
+    this.newFullname = this.user.fullName;
+    this.newUsername = this.user.username;
+  },
   methods: {
     updateUser() {
-      if (this.newFullname) this.user.fullName = this.newFullname;
+      const newUserData = {};
+
+      if (this.newFullname) newUserData.fullName = this.newFullname;
 
       if (this.newUsername) {
         if (this.checkUsername(this.newUsername))
           return alert("Please, select another username");
-        this.user.username = this.newUsername;
+        newUserData.username = this.newUsername;
       }
 
       if (this.newPassword) {
         if (this.newPassword.length < 8)
           return alert("Password length must be min 8 characters");
-        this.user.password = this.newPassword;
+        newUserData.password = this.newPassword;
       }
+
+      this.$emit("updateUser", newUserData);
 
       this.$router.push(`/${this.user.userId}`);
     },
     checkUsername(username) {
-      return this.users.find((user) => user.username === username);
+      return this.allUsersFiltered().find((user) => user.username === username);
+    },
+    allUsersFiltered() {
+      return this.users.filter((user) => user.userId !== this.user.userId);
     },
   },
 };

@@ -5,6 +5,7 @@
       :currentUser="currentUser()"
       @addNewUser="addNewUser"
       @addNewComment="addNewComment"
+      @updateUser="updateUser"
       class="component"
     />
   </div>
@@ -58,6 +59,12 @@ export default {
       },
     ],
   }),
+  created() {
+    if (!this.currentUser()) {
+      localStorage.removeItem("token");
+      this.$router.push({ name: "SignIn" });
+    }
+  },
   methods: {
     currentUser() {
       const userId = localStorage.getItem("token");
@@ -72,12 +79,13 @@ export default {
 
       user.comments.push(comment);
     },
-  },
-  created() {
-    if (!this.currentUser()) {
-      localStorage.removeItem("token");
-      this.$router.push({ name: "SignIn" });
-    }
+
+    updateUser(userData) {
+      const currentUser = this.currentUser();
+      for (const key in userData) {
+        currentUser[key] = userData[key];
+      }
+    },
   },
 };
 </script>
